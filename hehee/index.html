@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tình iêu nhỏ</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ffe4e1;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+            transition: background-color 0.5s;
+        }
+        h1 {
+            color: #ff69b4;
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+        img {
+            width: 300px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .heart {
+            font-size: 50px;
+            color: red;
+            cursor: pointer;
+        }
+        .flying-heart {
+            position: absolute;
+            font-size: 30px;
+            color: red;
+            animation: fly 2s forwards;
+        }
+        @keyframes fly {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title"></h1>
+    <img id="loveImage" src="a.png" alt="a">
+    <div class="heart" onclick="sendHearts(event)">❤️</div>
+    <p id="loveMessage" style="display: none;">Chúc anh iêu ngủ ngon nhá!</p>
+
+    <script>
+        function sendHearts(event) {
+            const heartCount = 50;
+            const rect = event.target.getBoundingClientRect();
+            const startX = rect.left + rect.width / 2;
+            const startY = rect.top + rect.height / 2;
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'flying-heart';
+                heart.innerText = '❤️';
+
+                const randomX = (Math.random() - 0.5) * 600;
+                const randomY = (Math.random() - 1) * 500; 
+
+                heart.style.left = `${startX}px`;
+                heart.style.top = `${startY}px`;
+                heart.style.setProperty('--x', `${randomX}px`);
+                heart.style.setProperty('--y', `${randomY}px`);
+                heart.style.animationDelay = `${Math.random()}s`;
+
+                document.body.appendChild(heart);
+
+                heart.addEventListener('animationend', () => {
+                    heart.remove();
+                });
+            }
+
+            document.getElementById('loveImage').style.display = 'block';
+            document.getElementById('loveMessage').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('loveImage').style.opacity = '1';
+                document.getElementById('loveMessage').style.opacity = '1';
+            }, 10);
+
+
+            document.body.style.backgroundColor = '#fff0f5'; 
+            document.getElementById('title').style.opacity = '0';
+        }
+    </script>
+</body>
+</html>
