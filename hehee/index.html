@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tình iêu nhỏ</title>
     <style>
         body {
@@ -16,14 +16,18 @@
             overflow: hidden;
             position: relative;
             transition: background-color 0.5s;
+            margin: 0; /
         }
         h1 {
             color: #ff69b4;
             opacity: 1;
             transition: opacity 0.5s;
+            font-size: 2em; /
+            text-align: center; /
         }
         img {
-            width: 300px;
+            width: 80%; /
+            max-width: 300px; /
             border-radius: 10px;
             margin: 20px 0;
             display: none;
@@ -94,10 +98,11 @@
                 document.getElementById('loveMessage').style.opacity = '1';
             }, 10);
 
-
             document.body.style.backgroundColor = '#fff0f5'; 
             document.getElementById('title').style.opacity = '0';
         }
+
+        document.getElementById('title').innerText = "Tình yêu nhỏ";
     </script>
 </body>
 </html>
